@@ -3,7 +3,7 @@ package JeuDeBatail;
 public class JeuDeBatailTestDrive {
 	public static void main(String[] args) {
 		PartieDeCartes partie = new PartieDeCartes();
-		partie.ajouterJoueur(4);
+		partie.ajouterJoueur(16);
 		//System.out.println(partie.getJoueurs());
 		partie.distribuerCartes();
 		/*while(!(partie.estTermine())) {

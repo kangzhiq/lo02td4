@@ -48,15 +48,21 @@ public class PartieDeCartes {
 		Iterator<Joueur> it = joueurs.iterator();
 		while (!cartes.estVide()) {
 			if (it.hasNext()) {
-				it.next().recupererCarte(cartes.getCarte());
-				System.out.println("Carte " + cartes.getCarte().toString() + " a " + it.next().toString());
+				Joueur j = it.next();
+				j.recupererCarte(cartes.getCarte());
+				System.out.println("Carte " + cartes.getCarte().toString() + " a " + j.toString());
 			} else {
 				it = joueurs.iterator();
 
 			}
 
 		}
+		/*it = joueurs.iterator();
+		while(it.hasNext()) {
+			System.out.println(it.next().getTas().toString());
+		}*/
 		System.out.println("On a distribue toutes les cartes");
+		
 
 	}
 

@@ -58,5 +58,8 @@ public class Joueur {
 		sb.append(this.getNom());
 		return sb.toString();
 	}
+	public LinkedList<Carte> getTas(){
+		return tas;
+	}
 
 }
