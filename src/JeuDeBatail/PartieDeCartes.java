@@ -49,6 +49,7 @@ public class PartieDeCartes {
 		while (!cartes.estVide()) {
 			if (it.hasNext()) {
 				it.next().recupererCarte(cartes.getCarte());
+				System.out.println("Carte " + cartes.getCarte().toString() + " a " + it.next().toString());
 			} else {
 				it = joueurs.iterator();
 
@@ -61,11 +62,13 @@ public class PartieDeCartes {
 
 	public void testIterator() {
 		Iterator<Joueur> it = joueurs.iterator();
-		int i =0;
-		while (it.hasNext()) {
-			System.out.println(it.next().toString());
-			i = i+1;
-			System.out.println(i);
+		int i = 0;
+		while (i < 10) {
+			while (it.hasNext()) {
+				System.out.println(it.next().toString());
+				System.out.println(i);
+				i = i + 1;
+			}
 		}
 	}
 
@@ -109,8 +112,8 @@ public class PartieDeCartes {
 			}
 		}
 	}
-	
-	public void retirerJoueurPerdant( Joueur j) {
+
+	public void retirerJoueurPerdant(Joueur j) {
 		joueurs.remove(j);
 	}
 
