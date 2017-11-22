@@ -13,8 +13,14 @@ public class JeuDeCartes {
 		for (int type = 0; type < 4; type++) {
 			for (int valeur = 0; valeur < 8; valeur++) {
 				jeu.add(new Carte(valeur, type));
+				
 			}
 		}
+		Iterator<Carte> it = jeu.iterator();
+		while(it.hasNext()) {
+			System.out.println("Carte"+ it.next().toString());
+		}
+		
 	}
 	
 	//melange le jeu de carte
@@ -39,6 +45,9 @@ public class JeuDeCartes {
 		Carte a = jeu.pop();
 		return a;
 	}
-
+    
+	public LinkedList<Carte> getCartes(){
+		return jeu;
+	}
 
 }

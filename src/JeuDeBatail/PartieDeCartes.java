@@ -49,34 +49,33 @@ public class PartieDeCartes {
 		while (!cartes.estVide()) {
 			if (it.hasNext()) {
 				Joueur j = it.next();
-				j.recupererCarte(cartes.getCarte());
-				System.out.println("Carte " + cartes.getCarte().toString() + " a " + j.toString());
+				Carte c = cartes.getCarte();
+				j.recupererCarte(c);
+				// test de distribution des cartes
+				/*
+				 * System.out.println("Carte " +c.toString() + " a " + j.toString());
+				 * System.out.println("Nombre " + cartes.getCartes().size());
+				 */
 			} else {
 				it = joueurs.iterator();
 
 			}
 
 		}
-		/*it = joueurs.iterator();
-		while(it.hasNext()) {
-			System.out.println(it.next().getTas().toString());
-		}*/
+		/*
+		 * it = joueurs.iterator(); while(it.hasNext()) {
+		 * System.out.println(it.next().getTas().toString()); }
+		 */
 		System.out.println("On a distribue toutes les cartes");
-		
 
 	}
-
-	public void testIterator() {
-		Iterator<Joueur> it = joueurs.iterator();
-		int i = 0;
-		while (i < 10) {
-			while (it.hasNext()) {
-				System.out.println(it.next().toString());
-				System.out.println(i);
-				i = i + 1;
-			}
-		}
-	}
+	// test d'Iterator
+	/*
+	 * public void testIterator() { Iterator<Joueur> it = joueurs.iterator(); int i
+	 * = 0; while (i < 10) { while (it.hasNext()) {
+	 * System.out.println(it.next().toString()); System.out.println(i); i = i + 1; }
+	 * } }
+	 */
 
 	public void jouerUnTour() {
 		Iterator<Joueur> it = joueurs.iterator();
@@ -87,23 +86,30 @@ public class PartieDeCartes {
 		Carte laPlusGrande = null;
 		// commmence un tour
 		while (it.hasNext()) {
-			Carte c = it.next().poserCarte();
+			Joueur j = it.next();
+			Carte c = j.poserCarte();
 			if (!(c == null)) {
-				System.out.println("Le joueur " + it.next().getNom() + " a pose " + c.toString());
-				coupleEnCour.put(c, it.next());
+				System.out.println("Le joueur " + j.getNom() + " a pose " + c.toString() + " Nombre "+ j.getTas().size());
+				coupleEnCour.put(c, j);
 				if (laPlusGrande == null) {
 					laPlusGrande = c;
 				} else {
 					laPlusGrande = laPlusGrande.comparer(c);
 				}
 				cartesPosees.add(c);
-			} else {
-				this.retirerJoueurPerdant(it.next());
 			}
+
 		}
 		// determiner le joueur gagnant
 		Joueur gagnant = coupleEnCour.get(laPlusGrande);
 		gagnant.recupererCarte(cartesPosees);
+		Iterator<Joueur> itV = joueurs.iterator();
+		while(itV.hasNext()) {
+			Joueur j = itV.next();
+			if(j.aPerdu()) {
+				joueurs.remove(j);
+			}
+		}
 		System.out.println("Le joueur " + gagnant.getNom() + " a gagne ce tour");
 		System.out.println(" ");
 		// supprimer eventuellement des joueurs perdants
@@ -113,8 +119,9 @@ public class PartieDeCartes {
 	public void retirerJoueurPerdant() {
 		Iterator<Joueur> it = joueurs.iterator();
 		while (it.hasNext()) {
-			if (it.next().aPerdu()) {
-				joueurs.remove(it.next());
+			Joueur j = it.next();
+			if (j.aPerdu()) {
+				joueurs.remove(j);
 			}
 		}
 	}
@@ -127,7 +134,8 @@ public class PartieDeCartes {
 		Iterator<Joueur> it = joueurs.iterator();
 		boolean res = false;
 		while (it.hasNext()) {
-			if (it.next().aGagne()) {
+			Joueur j = it.next();
+			if (j.aGagne()) {
 				res = true;
 			}
 		}
@@ -137,10 +145,11 @@ public class PartieDeCartes {
 	public void afficherRes() {
 		Iterator<Joueur> it = joueurs.iterator();
 		while (it.hasNext()) {
-			if (it.next().aGagne()) {
-				System.out.println("Le joueur " + it.next().getNom() + "a gagne");
+			Joueur j = it.next();
+			if (j.aGagne()) {
+				System.out.println("Le joueur " + j.getNom() + "a gagne");
 			} else {
-				System.out.println("Le joueur " + it.next().getNom() + "a perdu");
+				System.out.println("Le joueur " + j.getNom() + "a perdu");
 
 			}
 		}
