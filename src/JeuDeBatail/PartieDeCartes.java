@@ -52,10 +52,9 @@ public class PartieDeCartes {
 				Carte c = cartes.getCarte();
 				j.recupererCarte(c);
 				// test de distribution des cartes
-				/*
-				 * System.out.println("Carte " +c.toString() + " a " + j.toString());
-				 * System.out.println("Nombre " + cartes.getCartes().size());
-				 */
+
+				System.out.println("Carte " + c.toString() + " a " + j.toString());
+
 			} else {
 				it = joueurs.iterator();
 
@@ -89,7 +88,8 @@ public class PartieDeCartes {
 			Joueur j = it.next();
 			Carte c = j.poserCarte();
 			if (!(c == null)) {
-				System.out.println("Le joueur " + j.getNom() + " a pose " + c.toString() + " Nombre "+ j.getTas().size());
+				System.out.println(
+						"Le joueur " + j.getNom() + " a pose " + c.toString() + " Nombre " + j.getTas().size());
 				coupleEnCour.put(c, j);
 				if (laPlusGrande == null) {
 					laPlusGrande = c;
@@ -103,11 +103,14 @@ public class PartieDeCartes {
 		// determiner le joueur gagnant
 		Joueur gagnant = coupleEnCour.get(laPlusGrande);
 		gagnant.recupererCarte(cartesPosees);
+		// retirer les joueurs perdants
 		Iterator<Joueur> itV = joueurs.iterator();
-		while(itV.hasNext()) {
+		while (itV.hasNext()) {
 			Joueur j = itV.next();
-			if(j.aPerdu()) {
-				joueurs.remove(j);
+			if (j.aPerdu()) {
+				// joueurs.remove(j);
+				itV.remove();
+				System.out.println("remove " + j.toString());
 			}
 		}
 		System.out.println("Le joueur " + gagnant.getNom() + " a gagne ce tour");

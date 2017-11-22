@@ -51,14 +51,15 @@ public class Joueur {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
+
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("Joueur ");
 		sb.append(this.getNom());
 		return sb.toString();
 	}
-	public LinkedList<Carte> getTas(){
+
+	public LinkedList<Carte> getTas() {
 		return tas;
 	}
 
